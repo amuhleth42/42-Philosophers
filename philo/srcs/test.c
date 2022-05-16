@@ -1,19 +1,54 @@
 
 #include "philo.h"
 
+
+void	*routine(void *arg)
+{
+	t_data	*a;
+	t_philo	*philo;
+	philo = arg;
+	a = philo->backup;
+	printf("Yo moi c'est %d/%d\n", philo->nb, a->nb_philo);
+
+	return (NULL);
+}
+
+void	start_threads(t_data *a)
+{
+	int	i;
+
+	i = 0;
+	while (i < a->nb_philo)
+	{
+		a->philo[i].backup = a;
+		a->philo[i].nb = i;
+		pthread_create(&a->philo[i].tid, NULL, &routine, &a->philo[i]);
+		i++;
+	}
+	i = 0;
+	while (i < a->nb_philo)
+	{
+		pthread_join(a->philo[i].tid, NULL);
+		i++;
+	}
+}
+
 void	init_philo(t_data *a)
 {
 	a->philo = ft_calloc(a->nb_philo + 1, sizeof(t_philo));
+	a->forks = ft_calloc(a->nb_philo + 1, sizeof(pthread_mutex_t));
 }
 
 void	free_philo(t_data *a)
 {
 	free(a->philo);
+	free(a->forks);
 }
 
 void	process(t_data *a)
 {
 	init_philo(a);
+	start_threads(a);
 
 
 	free_philo(a);
