@@ -1,3 +1,5 @@
+// sum an array using threads
+
 
 #include <pthreads.h>
 
@@ -32,7 +34,7 @@ int	main(int argc, char **argv)
 	{
 		a = malloc(sizeof(int));
 		a = i * 5;
-		if (pthread_create(th + i, &routine, , ) != 0)
+		if (pthread_create(th + i, NULL, &routine, a) != 0)
 			return (1);
 		i++;
 	}
