@@ -10,16 +10,19 @@ SRCS	= 	test.c		\
 			utils.c		\
 			print.c		\
 			time.c		\
+			checker.c	\
+			init.c		\
+			philos.c	\
 
 OBJS	= $(SRCS:%.c=$(OBJS_DIR)/%.o)
 
 all :	$(NAME)
 
 $(OBJS_DIR)/%.o :	$(SRCS_DIR)/%.c
-	gcc $(CFLAGS) $(INCL) -c $< -o $@
+	gcc $(CFLAGS) $(INCL) -c $< -o $@ -g
 
 $(NAME) :	$(OBJS)
-	gcc $(CFLAGS) $(INCL) $(OBJS) -o $(NAME)
+	gcc $(CFLAGS) $(INCL) $(OBJS) -o $(NAME) -g
 
 clean :
 	rm -rf $(OBJS_DIR)

@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 13:43:17 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/05/24 15:00:09 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/05/24 20:54:49 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@ typedef struct s_data t_data;
 
 typedef struct s_philo
 {
-	pthread_t	tid;
-	int			nb;
-	int			eat_done;
-	int			sleep_done;
-	int			is_dead;
-	t_data		*backup;
-}				t_philo;
+	pthread_t		tid;
+	int				nb;
+	struct timeval	last_meal;
+	int				meal_count;
+	int				eat_done;
+	t_data			*backup;
+}					t_philo;
 
 typedef struct s_data
 {
@@ -46,6 +46,7 @@ typedef struct s_data
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				loop;
+	int				one_is_dead;
 	t_philo			*philo;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	writing;
@@ -58,8 +59,18 @@ int		ft_atoi(const char *str);
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t count, size_t size);
 
+void	init_philo(t_data *a);
+void	init_mutex(t_data *a);
+void	start_threads(t_data *a);
+
+void	*routine_philo(void *arg);
+
+void	*checker_routine(void *arg);
+void	detach_all(t_data *a);
+
 void	print_log(t_philo *philo, t_data *a, int cmd);
 
-void	get_timestamp(t_data *a);
+int		get_timestamp(t_data *a);
+int		get_time_diff(t_philo *philo);
 
 #endif
