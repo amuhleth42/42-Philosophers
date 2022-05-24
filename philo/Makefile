@@ -8,6 +8,8 @@ OBJS_DIR	= $(shell mkdir -p objs && printf "objs")
 
 SRCS	= 	test.c		\
 			utils.c		\
+			print.c		\
+			time.c		\
 
 OBJS	= $(SRCS:%.c=$(OBJS_DIR)/%.o)
 
