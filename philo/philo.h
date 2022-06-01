@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 13:43:17 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/01 16:36:55 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/01 19:43:54 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct s_data
 	pthread_mutex_t	writing;
 	pthread_t		checker;
 	struct timeval	start;
+	struct timeval	check_time;
 	int				timestamp;
 }					t_data;
 
@@ -71,6 +72,6 @@ void	detach_all(t_data *a);
 void	print_log(t_philo *philo, t_data *a, int cmd);
 
 int		get_timestamp(t_data *a);
-int		get_time_diff(t_philo *philo);
+int		get_time_diff(t_philo *philo, struct timeval *check_time);
 
 #endif

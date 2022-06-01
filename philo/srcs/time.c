@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 14:38:12 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/05/24 20:48:51 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/01 19:28:42 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,12 @@ int	get_timestamp(t_data *a)
 	return (sec * 1000 + usec / 1000);
 }
 
-int	get_time_diff(t_philo *philo)
+int	get_time_diff(t_philo *philo, struct timeval *check_time)
 {
-	struct timeval	now;
-	double			sec;
-	double			usec;
+	double	sec;
+	double	usec;
 
-	gettimeofday(&now, NULL);
-	sec = now.tv_sec - philo->last_meal.tv_sec;
-	usec = now.tv_usec - philo->last_meal.tv_usec;
+	sec = check_time->tv_sec - philo->last_meal.tv_sec;
+	usec = check_time->tv_usec - philo->last_meal.tv_usec;
 	return (sec * 1000 + usec / 1000);
 }

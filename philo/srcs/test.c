@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 13:43:25 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/05/24 20:44:41 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/01 18:39:42 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ int	main(int argc, char **argv)
 	}
 	a.nb_philo = ft_atoi(argv[1]);
 	a.time_to_die = ft_atoi(argv[2]);
-	a.time_to_eat = ft_atoi(argv[3]);
-	a.time_to_sleep = ft_atoi(argv[4]);
+	a.time_to_eat = 1000 * ft_atoi(argv[3]);
+	a.time_to_sleep = 1000 * ft_atoi(argv[4]);
 	if (argc == 6)
 		a.loop = ft_atoi(argv[5]);
 	process(&a);

@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:19:41 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/01 16:44:31 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/01 19:52:07 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,17 @@ void	detach_all(t_data *a)
 	}
 }
 
-void	*checker_routine(void *arg)
+void	checker(t_data *a, t_philo *philo)
 {
-	t_data	*a;
-	t_philo	*philo;
-	int		i;
-	int		time;
+	int	i;
+	int	time;
 
-	philo = arg;
-	a = philo->backup;
 	i = 0;
 	while (1)
 	{
-		time = get_time_diff(&a->philo[i]);
+		gettimeofday(&a->check_time, NULL);
+		usleep(3500);
+		time = get_time_diff(&a->philo[i], &a->check_time);
 		if (time >= a->time_to_die && !philo[i].done)
 		{
 			print_log(&a->philo[i], a, DIED);
@@ -49,5 +47,15 @@ void	*checker_routine(void *arg)
 		if (i == a->nb_philo)
 			i = 0;
 	}
+}
+
+void	*checker_routine(void *arg)
+{
+	t_data	*a;
+	t_philo	*philo;
+
+	philo = arg;
+	a = philo->backup;
+	checker(a, philo);
 	return (NULL);
 }
