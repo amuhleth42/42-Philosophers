@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:14:59 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/05/24 20:47:50 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/01 16:11:28 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,11 @@ void	start_threads(t_data *a)
 	{
 		a->philo[i].backup = a;
 		a->philo[i].nb = i;
-		if (pthread_create(&a->philo[i].tid, NULL, &routine_philo, &a->philo[i]) != 0)
+		if (pthread_create(&a->philo[i].tid, NULL,
+				&routine_philo, &a->philo[i]) != 0)
 			perror("Aiieeeeeee");
 		i++;
 	}
 	if (pthread_create(&a->checker, NULL, &checker_routine, &a->philo[0]) != 0)
 		perror("Aiieeeeeee");
-	/*i = 0;
-	while (i < a->nb_philo)
-	{
-		pthread_join(a->philo[i].tid, NULL);
-		i++;
-	}*/
 }

@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:19:41 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/05/24 20:48:34 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/01 16:44:31 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,14 @@ void	*checker_routine(void *arg)
 	while (1)
 	{
 		time = get_time_diff(&a->philo[i]);
-		if (time >= a->time_to_die)
+		if (time >= a->time_to_die && !philo[i].done)
 		{
-			a->one_is_dead = 1;
 			print_log(&a->philo[i], a, DIED);
 			detach_all(a);
 			break ;
 		}
+		if (a->count_done == a->nb_philo)
+			break ;
 		i++;
 		if (i == a->nb_philo)
 			i = 0;

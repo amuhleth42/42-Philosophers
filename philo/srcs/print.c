@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 13:59:59 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/05/24 19:24:46 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/01 16:54:58 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,16 @@ void	print_log(t_philo *philo, t_data *a, int cmd)
 	a->timestamp = get_timestamp(a);
 	printf("%7d ms    philo nb %-3d ", a->timestamp, philo->nb + 1);
 	if (cmd == FORK)
-		printf("has taken a fork\n");
+		printf("\033[0;33mhas taken a fork\n");
 	else if (cmd == EAT)
-		printf("is eating\n");
+		printf("\033[0;32mis eating, %d\n", philo->meal_count + 1);
 	else if (cmd == SLEEP)
-		printf("is sleeping\n");
+		printf("\033[0;34mis sleeping\n");
 	else if (cmd == THINK)
-		printf("is thinking\n");
+		printf("\033[0;35mis thinking\n");
 	else if (cmd == DIED)
-		printf("died\n");
-	pthread_mutex_unlock(&a->writing);
+		printf("\033[0;31mdied\n");
+	printf("\033[0m");
+	if (cmd != DIED)
+		pthread_mutex_unlock(&a->writing);
 }

@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:17:57 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/05/24 20:54:36 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/01 16:47:39 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ void	eat(t_philo *philo, t_data *a)
 	gettimeofday(&philo->last_meal, NULL);
 	usleep(a->time_to_eat * 1000);
 	philo->meal_count++;
-	if (philo->meal_count == a->loop)
-		philo->eat_done = 1;
 }
 
 void	philo_sleep(t_philo *philo, t_data *a)
@@ -64,6 +62,12 @@ void	*routine_philo(void *arg)
 		take_forks(philo, a);
 		eat(philo, a);
 		unlock_forks(philo, a);
+		if (philo->meal_count == a->loop)
+		{
+			philo->done = 1;
+			a->count_done++;
+			break ;
+		}
 		philo_sleep(philo, a);
 	}
 	return (NULL);
