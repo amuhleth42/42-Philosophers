@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:19:41 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/01 19:52:07 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/01 20:34:56 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	checker(t_data *a, t_philo *philo)
 	while (1)
 	{
 		gettimeofday(&a->check_time, NULL);
-		usleep(3500);
+		usleep(2500);
 		time = get_time_diff(&a->philo[i], &a->check_time);
 		if (time >= a->time_to_die && !philo[i].done)
 		{
