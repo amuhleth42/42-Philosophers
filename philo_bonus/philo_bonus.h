@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 18:48:27 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/02 18:56:02 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/02 19:06:20 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,29 @@
 
 typedef struct s_philo
 {
-}		t_philo;
+	int				nb;
+	struct timeval	last_meal;
+	int				meal_count;
+	int				done;
+	t_data			*backup;
+}					t_philo;
 
 typedef struct s_data
 {
-	int	timestamp;
-}		t_data;
+	int				nb_philo;
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
+	int				loop;
+	int				count_done;
+	t_philo			*philo;
+	sem_t			*forks;
+	sem_t			writing;
+	//pthread_t		checker;
+	struct timeval	start;
+	struct timeval	check_time;
+	int				timestamp;
+}					t_data;
 
 int		ft_atoi(const char *str);
 void	ft_bzero(void *s, size_t n);
