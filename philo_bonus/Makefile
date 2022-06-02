@@ -6,13 +6,13 @@ INCL	= -I.
 SRCS_DIR	= srcs
 OBJS_DIR	= $(shell mkdir -p objs && printf "objs")
 
-SRCS	= 	test.c		\
+SRCS	= 	main.c		\
 			utils.c		\
 			print.c		\
 			time.c		\
-			checker.c	\
 			init.c		\
 			philos.c	\
+			error.c		\
 
 OBJS	= $(SRCS:%.c=$(OBJS_DIR)/%.o)
 

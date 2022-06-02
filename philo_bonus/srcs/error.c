@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 19:23:49 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/02 19:24:16 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/02 19:59:16 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@ void	ft_putstr_fd(char *s, int fd)
 
 void	die(char *s)
 {
-	ft_putstr_fd(s, STDERR);
+	ft_putstr_fd(s, STDERR_FILENO);
 	exit(EXIT_FAILURE);
 }

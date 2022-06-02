@@ -6,26 +6,29 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 19:00:54 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/02 19:07:46 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/02 19:56:17 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
-void	free_philo(t_data *a)
+void	close_semaphores(t_data *a)
 {
-	free(a->philo);
+	sem_close(a->forks);
+	sem_close(a->writing);
 }
 
 void	process(t_data *a)
 {
-	init_philo(a);
+	a->pid = ft_calloc(a->nb_philo + 1, sizeof(pid_t));
+	if (!a->pid)
+		die("Malloc error\n");
 	init_semaphore(a);
 	gettimeofday(&a->start, NULL);
 	start_processes(a);
-	pthread_join(a->checker, NULL);
-	free_philo(a);
-	destroy_mutex(a);
+	//pthread_join(a->checker, NULL);
+	free(a->pid);
+	close_semaphores(a);
 }
 
 int	main(int argc, char **argv)

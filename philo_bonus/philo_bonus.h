@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 18:48:27 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/02 19:06:20 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/02 19:57:53 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ typedef struct s_philo
 	struct timeval	last_meal;
 	int				meal_count;
 	int				done;
-	t_data			*backup;
 }					t_philo;
 
 typedef struct s_data
@@ -45,9 +44,10 @@ typedef struct s_data
 	int				time_to_sleep;
 	int				loop;
 	int				count_done;
-	t_philo			*philo;
+	pid_t			*pid;
+	t_philo			philo;
 	sem_t			*forks;
-	sem_t			writing;
+	sem_t			*writing;
 	//pthread_t		checker;
 	struct timeval	start;
 	struct timeval	check_time;
@@ -58,6 +58,15 @@ int		ft_atoi(const char *str);
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t count, size_t size);
 
-void	print_log(t_philo *philo, t_data *a, int cmd);
+void	die(char *s);
+
+void	init_semaphore(t_data *a);
+void	start_processes(t_data *a);
+
+void	print_log(t_data *a, int cmd);
+
+int		get_timestamp(t_data *a);
+
+void	routine_philo(t_data *a);
 
 #endif
