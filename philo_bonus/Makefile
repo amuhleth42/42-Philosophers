@@ -13,6 +13,7 @@ SRCS	= 	main.c		\
 			init.c		\
 			philos.c	\
 			error.c		\
+			checker.c	\
 
 OBJS	= $(SRCS:%.c=$(OBJS_DIR)/%.o)
 

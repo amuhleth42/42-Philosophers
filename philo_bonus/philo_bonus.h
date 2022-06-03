@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 18:48:27 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/02 19:57:53 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/03 16:45:41 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <pthread.h>
 # include <limits.h>
 # include <semaphore.h>
+# include <signal.h>
 
 # define FORK 0
 # define EAT 1
@@ -30,6 +31,7 @@
 
 typedef struct s_philo
 {
+	pthread_t		tid;
 	int				nb;
 	struct timeval	last_meal;
 	int				meal_count;
@@ -48,10 +50,15 @@ typedef struct s_data
 	t_philo			philo;
 	sem_t			*forks;
 	sem_t			*writing;
-	//pthread_t		checker;
+	sem_t			*died;
+	sem_t			*done;
+	pthread_t		check_died;
+	pthread_t		check_all_done;
 	struct timeval	start;
 	struct timeval	check_time;
 	int				timestamp;
+	int				one_died;
+	int				all_done;
 }					t_data;
 
 int		ft_atoi(const char *str);
@@ -66,7 +73,10 @@ void	start_processes(t_data *a);
 void	print_log(t_data *a, int cmd);
 
 int		get_timestamp(t_data *a);
+int		get_time_diff(t_philo *philo, struct timeval *checktime);
 
 void	routine_philo(t_data *a);
+
+void	*checker_routine(void *arg);
 
 #endif

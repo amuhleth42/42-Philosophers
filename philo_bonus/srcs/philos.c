@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 19:43:38 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/02 19:58:35 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/03 16:50:51 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ void	routine_philo(t_data *a)
 {
 	if (a->philo.nb % 2 != 0)
 		usleep(800);
+	if (pthread_create(&a->philo.tid, NULL, &checker_routine, a) != 0)
+		exit(EXIT_FAILURE); //quit all
 	gettimeofday(&a->philo.last_meal, NULL);
 	while (1)
 	{

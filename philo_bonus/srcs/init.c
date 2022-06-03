@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 19:08:20 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/02 19:43:21 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/03 17:00:07 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,15 @@ void	init_semaphore(t_data *a)
 {
 	sem_unlink("/sem_forks");
 	sem_unlink("/sem_writing");
+	sem_unlink("/sem_died");
+	sem_unlink("/sem_done");
 	a->forks = sem_open("/sem_forks", O_CREAT, 0664, a->nb_philo);
 	a->writing = sem_open("/sem_writing", O_CREAT, 0664, 1);
+	a->died = sem_open("/sem_died", O_CREAT, 0664, 0);
+	a->done = sem_open("/sem_done", O_CREAT, 0664, 0);
 	if (a->forks == SEM_FAILED || a->writing == SEM_FAILED)
+		die("Failed to open semaphore\n");
+	if (a->died == SEM_FAILED || a->done == SEM_FAILED)
 		die("Failed to open semaphore\n");
 }
 
