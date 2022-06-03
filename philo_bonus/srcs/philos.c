@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 19:43:38 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/03 16:50:51 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/03 18:26:16 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,11 @@ void	routine_philo(t_data *a)
 		if (a->philo.meal_count == a->loop)
 		{
 			a->philo.done = 1;
-			a->count_done++;
+			sem_post(a->done);
 			break ;
 		}
 		philo_sleep(a);
 	}
-	exit(EXIT_SUCCESS);
+	pause();
+	//exit(EXIT_SUCCESS);
 }

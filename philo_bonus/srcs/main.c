@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 19:00:54 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/03 16:45:05 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/03 19:15:07 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,23 @@ void	*check_all_done(void *arg)
 	return (NULL);
 }
 
-void	process(t_data *a)
+void	end_simulation(t_data *a)
 {
 	int	i;
 
+	while (!a->all_done && !a->one_died)
+		usleep(200);
+	while (!a->all_done)
+		sem_post(a->done);
+	if (!a->one_died)
+		sem_post(a->died);
+	i = 0;
+	while (i < a->nb_philo)
+		kill(a->pid[i++], SIGTERM);
+}
+
+void	process(t_data *a)
+{
 	a->pid = ft_calloc(a->nb_philo + 1, sizeof(pid_t));
 	if (!a->pid)
 		die("Malloc error\n");
@@ -58,13 +71,9 @@ void	process(t_data *a)
 	start_processes(a);
 	if (pthread_create(&a->check_died, NULL, &check_died, a) != 0)
 		exit(EXIT_FAILURE);
-	if (pthread_create(&a->check_all_done, NULL, &check_died, a) != 0)
+	if (pthread_create(&a->check_all_done, NULL, &check_all_done, a) != 0)
 		exit(EXIT_FAILURE);
-	i = 0;
-	while (!a->all_done || !a->one_died)
-		usleep(200);
-	while (i < a->nb_philo)
-		kill(a->pid[i], SIGKILL);
+	end_simulation(a);
 	free(a->pid);
 	close_semaphores(a);
 }
