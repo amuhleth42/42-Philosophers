@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 13:43:17 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/01 19:43:54 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/05 10:51:50 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define THINK 3
 # define DIED 4
 
-typedef struct s_data t_data;
+typedef struct s_data	t_data;
 
 typedef struct s_philo
 {

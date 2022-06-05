@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 19:00:54 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/03 19:15:07 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/05 10:56:35 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,32 +18,6 @@ void	close_semaphores(t_data *a)
 	sem_close(a->writing);
 	sem_close(a->died);
 	sem_close(a->done);
-}
-
-void	*check_died(void *arg)
-{
-	t_data	*a;
-
-	a = arg;
-	sem_wait(a->died);
-	a->one_died = 1;
-	return (NULL);
-}
-
-void	*check_all_done(void *arg)
-{
-	t_data	*a;
-	int		i;
-
-	a = arg;
-	i = 0;
-	while (i < a->nb_philo)
-	{
-		sem_wait(a->done);
-		i++;
-	}
-	a->all_done = 1;
-	return (NULL);
 }
 
 void	end_simulation(t_data *a)

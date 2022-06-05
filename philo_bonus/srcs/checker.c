@@ -6,11 +6,37 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:35:51 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/03 18:24:47 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/05 10:55:39 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
+
+void	*check_died(void *arg)
+{
+	t_data	*a;
+
+	a = arg;
+	sem_wait(a->died);
+	a->one_died = 1;
+	return (NULL);
+}
+
+void	*check_all_done(void *arg)
+{
+	t_data	*a;
+	int		i;
+
+	a = arg;
+	i = 0;
+	while (i < a->nb_philo)
+	{
+		sem_wait(a->done);
+		i++;
+	}
+	a->all_done = 1;
+	return (NULL);
+}
 
 void	checker(t_data *a)
 {
@@ -27,11 +53,6 @@ void	checker(t_data *a)
 			sem_post(a->died);
 			break ;
 		}
-		/*if (a->count_done == a->nb_philo)
-		{
-			sem_post(a->done);
-			break ;
-		}*/
 	}
 }
 

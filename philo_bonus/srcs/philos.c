@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 19:43:38 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/03 18:26:16 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/05 10:53:21 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,4 @@ void	routine_philo(t_data *a)
 		philo_sleep(a);
 	}
 	pause();
-	//exit(EXIT_SUCCESS);
 }

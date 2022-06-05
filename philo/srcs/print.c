@@ -6,12 +6,11 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 13:59:59 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/03 19:32:55 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/05 10:52:13 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
 
 void	print_log(t_philo *philo, t_data *a, int cmd)
 {

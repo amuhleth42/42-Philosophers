@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 18:48:27 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/03 16:45:41 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/05 10:56:25 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,7 @@ int		get_time_diff(t_philo *philo, struct timeval *checktime);
 void	routine_philo(t_data *a);
 
 void	*checker_routine(void *arg);
+void	*check_died(void *arg);
+void	*check_all_done(void *arg);
 
 #endif
