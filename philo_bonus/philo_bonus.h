@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 18:48:27 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/05 10:56:25 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/07/20 17:53:18 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void	print_log(t_data *a, int cmd);
 
 int		get_timestamp(t_data *a);
 int		get_time_diff(t_philo *philo, struct timeval *checktime);
+int		ft_usleep(int usec);
 
 void	routine_philo(t_data *a);
 

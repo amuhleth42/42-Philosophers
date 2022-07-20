@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 19:43:38 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/05 10:53:21 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/07/20 17:59:02 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,14 @@ void	eat(t_data *a)
 {
 	print_log(a, EAT);
 	gettimeofday(&a->philo.last_meal, NULL);
-	usleep(a->time_to_eat);
+	ft_usleep(a->time_to_eat);
 	a->philo.meal_count++;
 }
 
 void	philo_sleep(t_data *a)
 {
 	print_log(a, SLEEP);
-	usleep(a->time_to_sleep);
+	ft_usleep(a->time_to_sleep);
 	print_log(a, THINK);
 }
 
@@ -46,7 +46,10 @@ void	routine_philo(t_data *a)
 	if (a->philo.nb % 2 != 0)
 		usleep(800);
 	if (pthread_create(&a->philo.tid, NULL, &checker_routine, a) != 0)
-		exit(EXIT_FAILURE); //quit all
+	{
+		sem_post(a->done);
+		pause();
+	}
 	gettimeofday(&a->philo.last_meal, NULL);
 	while (1)
 	{

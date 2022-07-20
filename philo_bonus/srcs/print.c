@@ -6,13 +6,13 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 18:53:00 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/03 19:30:47 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/07/20 17:50:57 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
-void	print_log(t_data *a, int cmd)
+/*void	print_log(t_data *a, int cmd)
 {
 	sem_wait(a->writing);
 	a->timestamp = get_timestamp(a);
@@ -29,9 +29,9 @@ void	print_log(t_data *a, int cmd)
 		printf("died\033[0m\n");
 	if (cmd != DIED)
 		sem_post(a->writing);
-}
+}*/
 
-/*void	print_log(t_data *a, int cmd)
+void	print_log(t_data *a, int cmd)
 {
 	sem_wait(a->writing);
 	a->timestamp = get_timestamp(a);
@@ -48,4 +48,4 @@ void	print_log(t_data *a, int cmd)
 		printf("\033[0;31mdied\033[0m\n");
 	if (cmd != DIED)
 		sem_post(a->writing);
-}*/
+}
