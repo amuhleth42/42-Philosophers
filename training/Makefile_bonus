@@ -5,37 +5,44 @@
 #                                                     +:+ +:+         +:+      #
 #    By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/07/20 18:06:24 by amuhleth          #+#    #+#              #
-#    Updated: 2022/07/20 18:11:37 by amuhleth         ###   ########.fr        #
+#    Created: 2022/07/20 18:01:45 by amuhleth          #+#    #+#              #
+#    Updated: 2022/07/20 18:01:57 by amuhleth         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= philo_bonus
-CC		= gcc
+
 CFLAGS	= -Wall -Wextra -Werror
 INCL	= -I.
-SRCS	= 	$(addprefix srcs/,		\
-			main.c					\
-			utils.c					\
-			print.c					\
-			time.c					\
-			init.c					\
-			philos.c				\
-			error.c					\
-			checker.c)
 
-OBJS	= $(SRC:.c=.o)
+SRCS_DIR	= srcs
+OBJS_DIR	= $(shell mkdir -p objs && printf "objs")
 
+SRCS	= 	main.c		\
+			utils.c		\
+			print.c		\
+			time.c		\
+			init.c		\
+			philos.c	\
+			error.c		\
+			checker.c	\
 
-all : $(OBJS)
-	$(CC) $(CFLAGS) $(INCL) $(SRCS) -o $(NAME)
+OBJS	= $(SRCS:%.c=$(OBJS_DIR)/%.o)
+
+all :	$(NAME)
+
+$(OBJS_DIR)/%.o :	$(SRCS_DIR)/%.c
+	gcc $(CFLAGS) $(INCL) -c $< -o $@ -g
+
+$(NAME) :	$(OBJS)
+	gcc $(CFLAGS) $(INCL) $(OBJS) -o $(NAME) -g
 
 clean :
-	rm -Rf $(OBJS)
+	rm -rf $(OBJS_DIR)
+	rm $(NAME)
 
-fclean : clean
-	rm -Rf $(NAME)
+fclean :	clean
 
-re : fclean all
+re :		fclean all
 
-.PHONY: all clean fclean re
+.PHONY :	clean fclean all re

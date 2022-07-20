@@ -1,35 +1,40 @@
-NAME	= philo
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/07/20 18:03:09 by amuhleth          #+#    #+#              #
+#    Updated: 2022/07/20 18:14:37 by amuhleth         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
+NAME	= philo
+CC		= gcc
 CFLAGS	= -Wall -Wextra -Werror
 INCL	= -I.
+SRCS	= 	$(addprefix srcs/,	\
+			test.c				\
+			utils.c				\
+			print.c				\
+			time.c				\
+			checker.c			\
+			init.c				\
+			philos.c)
 
-SRCS_DIR	= srcs
-OBJS_DIR	= $(shell mkdir -p objs && printf "objs")
+OBJS	= $(SRC:.c=.o)
 
-SRCS	= 	test.c		\
-			utils.c		\
-			print.c		\
-			time.c		\
-			checker.c	\
-			init.c		\
-			philos.c	\
 
-OBJS	= $(SRCS:%.c=$(OBJS_DIR)/%.o)
+all : $(OBJS)
+	$(CC) $(CFLAGS) $(INCL) $(SRCS) -o $(NAME)
 
-all :	$(NAME)
+clean :	
+	rm -Rf $(OBJS)
 
-$(OBJS_DIR)/%.o :	$(SRCS_DIR)/%.c
-	gcc $(CFLAGS) $(INCL) -c $< -o $@ -g
+fclean : clean
+	rm -Rf $(NAME)
 
-$(NAME) :	$(OBJS)
-	gcc $(CFLAGS) $(INCL) $(OBJS) -o $(NAME) -g
+re : fclean all
 
-clean :
-	rm -rf $(OBJS_DIR)
-	rm $(NAME)
-
-fclean :	clean
-
-re :		fclean all
-
-.PHONY :	clean fclean all re
+.PHONY: all clean fclean re
