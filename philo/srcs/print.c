@@ -6,13 +6,13 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 13:59:59 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/05 10:52:13 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/07/20 17:10:17 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	print_log(t_philo *philo, t_data *a, int cmd)
+/*void	print_log(t_philo *philo, t_data *a, int cmd)
 {
 	pthread_mutex_lock(&a->writing);
 	a->timestamp = get_timestamp(a);
@@ -29,8 +29,8 @@ void	print_log(t_philo *philo, t_data *a, int cmd)
 		printf("died\n");
 	if (cmd != DIED)
 		pthread_mutex_unlock(&a->writing);
-}
-/*
+}*/
+
 void	print_log(t_philo *philo, t_data *a, int cmd)
 {
 	pthread_mutex_lock(&a->writing);
@@ -49,4 +49,4 @@ void	print_log(t_philo *philo, t_data *a, int cmd)
 	printf("\033[0m");
 	if (cmd != DIED)
 		pthread_mutex_unlock(&a->writing);
-}*/
+}
