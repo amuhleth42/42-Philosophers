@@ -6,14 +6,13 @@
 #    By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/20 18:06:24 by amuhleth          #+#    #+#              #
-#    Updated: 2022/07/20 18:11:37 by amuhleth         ###   ########.fr        #
+#    Updated: 2022/07/22 12:54:58 by amuhleth         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= philo_bonus
 CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror
-INCL	= -I.
+CFLAGS	= -Wall -Wextra -Werror -I.
 SRCS	= 	$(addprefix srcs/,		\
 			main.c					\
 			utils.c					\
@@ -24,11 +23,13 @@ SRCS	= 	$(addprefix srcs/,		\
 			error.c					\
 			checker.c)
 
-OBJS	= $(SRC:.c=.o)
+OBJS	= $(SRCS:.c=.o)
 
 
-all : $(OBJS)
-	$(CC) $(CFLAGS) $(INCL) $(SRCS) -o $(NAME)
+$(NAME) :	$(OBJS)
+	$(CC) $(CFLAGS) $(INCL) $(OBJS) -o $(NAME)
+
+all :	$(NAME)
 
 clean :
 	rm -Rf $(OBJS)
